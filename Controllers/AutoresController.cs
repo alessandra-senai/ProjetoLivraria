@@ -3,11 +3,12 @@ using ProjetoLivraria.Models;
 
 namespace ProjetoLivraria.Controllers
 {
-    [Route("api/autores")]
     [ApiController]
+    [Route("api/v{version:apiVersion}/autores")]
+    [ApiVersion("1.0", Deprecated = true)]
     public class AutoresController : ControllerBase
     {
-        // GET: api/<AutoresController>
+        [MapToApiVersion("1.0")]
         [HttpGet]
         public IEnumerable<Autor> Get()
         {
@@ -31,7 +32,7 @@ namespace ProjetoLivraria.Controllers
 
         }
 
-        // GET api/<AutoresController>/5
+        [MapToApiVersion("1.0")]
         [HttpGet("{id}")]
         public Autor Get(int id)
         {
@@ -61,6 +62,7 @@ namespace ProjetoLivraria.Controllers
            
         }
 
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
@@ -87,7 +89,7 @@ namespace ProjetoLivraria.Controllers
             autores.Add(autor); 
         }
 
-        // PUT api/<AutoresController>/5
+        [MapToApiVersion("1.0")]
         [HttpPut("{id}")]
         public Autor Put(int id, [FromBody] Autor autor)
         {
@@ -121,7 +123,7 @@ namespace ProjetoLivraria.Controllers
             return autorAlterado;
         }
 
-        // DELETE api/<AutoresController>/5
+        [MapToApiVersion("1.0")]
         [HttpDelete("{id}")]
         public List<Autor> Delete(int id)
         {
