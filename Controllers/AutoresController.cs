@@ -4,7 +4,7 @@ using ProjetoLivraria.Models;
 namespace ProjetoLivraria.Controllers
 {
     [ApiController]
-    [Route("api/v{version:apiVersion}/autores")]
+    [Route("api/autores")]
     [ApiVersion("1.0", Deprecated = true)]
     public class AutoresController : ControllerBase
     {

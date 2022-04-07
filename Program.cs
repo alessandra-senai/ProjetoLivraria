@@ -14,23 +14,25 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddVersionedApiExplorer(setup =>
-{
-    setup.GroupNameFormat = "'v'VVV";
-    setup.SubstituteApiVersionInUrl = true;
-});
-
 builder.Services.AddApiVersioning(o =>
 {
-    o.DefaultApiVersion = new ApiVersion(2, 0);
-    o.ReportApiVersions = true;
     o.AssumeDefaultVersionWhenUnspecified = true;
-
+    o.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(2, 0);
+    o.ReportApiVersions = true;
     o.ApiVersionReader = ApiVersionReader.Combine(
-        new QueryStringApiVersionReader("v"),
-        new HeaderApiVersionReader("api-version"),
-        new UrlSegmentApiVersionReader());
+       new QueryStringApiVersionReader("api-version"),
+        new HeaderApiVersionReader("X-Version"),
+        new MediaTypeApiVersionReader("ver")
+        );
 });
+
+
+builder.Services.AddVersionedApiExplorer(
+    options =>
+    {
+        options.GroupNameFormat = "'v'VVV";
+        options.SubstituteApiVersionInUrl = true;
+    });
 
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
 
