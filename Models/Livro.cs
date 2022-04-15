@@ -3,18 +3,22 @@ using System.Collections.Generic;
 
 namespace ProjetoLivraria.Models
 {
-    public partial class Autor
+    public partial class Livro
     {
-        public Autor()
+        public Livro()
         {
             LivroAutors = new HashSet<LivroAutor>();
         }
 
         public int Id { get; set; }
+        public int NumPagina { get; set; }
         public string Nome { get; set; } = null!;
-        public DateTime? DataNascimento { get; set; }
+        public DateTime DataPublicacao { get; set; }
+        public string? Genero { get; set; }
         public bool? Ativo { get; set; }
+        public int? IdEditora { get; set; }
 
+        public virtual Editora? IdEditoraNavigation { get; set; }
         public virtual ICollection<LivroAutor> LivroAutors { get; set; }
     }
 }

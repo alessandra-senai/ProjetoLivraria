@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
 using ProjetoLivraria;
+using ProjetoLivraria.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +37,15 @@ builder.Services.AddVersionedApiExplorer(
     });
 
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
+
+builder.Services.AddDbContext<LivrariaContext>(options =>
+                                options.UseSqlServer(
+                                    builder.Configuration.GetConnectionString("ServerConnection")));
+
+
+builder.Services.AddControllers().AddNewtonsoftJson(
+    x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
 var app = builder.Build();
 
