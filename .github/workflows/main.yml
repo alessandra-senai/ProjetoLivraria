@@ -1,0 +1,41 @@
+name: ProjetoLivraria
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a on-line script
+        run: echo hello, world
+  
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment:
+      name: DEV
+      url: 'www.uol.com.br'
+    needs: build
+    steps:
+      - name: Run a one-line script
+        run: echo deploy DEV
+        
+  deploy-homologacao:
+    runs-on: ubuntu-latest
+    environment:
+      name: HOMOL
+      url: 'www.uol.com.br'
+    needs: deploy-dev
+    steps:
+      - name: Run a on-line script
+        run: echo deploy HOMOLOGACAO
+        
+  deploy-producao:
+    runs-on: ubuntu-latest
+    environment:
+      name: PRD
+      url: 'www.uol.com.br'
+    needs: deploy-homologacao
+    steps:
+    - name: Run a on-line script
+      run: echo deploy PRODUCAO
+      
