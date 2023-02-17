@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: DEV
-      url: 'www.uol.com.br'
+      url: 'https://www.uol.com.br/'
     needs: build
     steps:
       - name: Run a one-line script
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: HOMOL
-      url: 'www.uol.com.br'
+      url: 'https://www.uol.com.br/'
     needs: deploy-dev
     steps:
       - name: Run a on-line script
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: PRD
-      url: 'www.uol.com.br'
+      url: 'https://www.uol.com.br/'
     needs: deploy-homologacao
     steps:
     - name: Run a on-line script
